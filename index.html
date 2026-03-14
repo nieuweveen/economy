@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FiveM Economy Balancer | Premium Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+            
+        <input hidden type="number" id="starterMoney" value="55000" step="1000" oninput="updateCalculations()">
+
+        <!-- TABLE 1 — ECONOMY SETTINGS -->
+        <section id="table-1">
+            <div class="table-header">
+                <h2>TABEL 1 — ECONOMIE INSTELLINGEN</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Instelling</th>
+                            <th>Waarde ($)</th>
+                            <th>Notities</th>
+                        </tr>
+                    </thead>
+                    <tbody id="economy-settings-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 2 — JOB PAYOUTS -->
+        <section id="table-2">
+            <div class="table-header">
+                <h2>TABEL 2 — SALARISSEN (BAANTJES)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Baan</th>
+                            <th>Rang</th>
+                            <th>Multiplier</th>
+                            <th>Berekend Salaris</th>
+                            <th>Factor t.o.v. Startgeld</th>
+                        </tr>
+                    </thead>
+                    <tbody id="job-payouts-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 3 — WEAPONS -->
+        <section id="table-3">
+            <div class="table-header">
+                <h2>TABEL 3 — WAPENS</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Wapen ID</th>
+                            <th>Naam</th>
+                            <th>Categorie</th>
+                            <th>Toegang</th>
+                            <th>Prijs ($)</th>
+                            <th>Factor t.o.v. Startgeld</th>
+                        </tr>
+                    </thead>
+                    <tbody id="weapons-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 4 — AMMO -->
+        <section id="table-4">
+            <div class="table-header">
+                <h2>TABEL 4 — AMMUNITIE</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ammo Type</th>
+                            <th>Toegang</th>
+                            <th>Prijs ($)</th>
+                            <th>Factor t.o.v. Startgeld</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ammo-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 5 — VEHICLES -->
+        <section id="table-5">
+            <div class="table-header">
+                <h2>TABEL 5 — VOERTUIGEN</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <div id="vehicles-container">
+                    <!-- Dynamic grouped content will be injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TABLE 6 — SERVICES -->
+        <section id="table-6">
+            <div class="table-header">
+                <h2>TABEL 6 — DIENSTEN & FINES</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dienst</th>
+                            <th>Prijs ($)</th>
+                            <th>Factor t.o.v. Startgeld</th>
+                        </tr>
+                    </thead>
+                    <tbody id="services-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 7 — JOB ITEMS -->
+        <section id="table-7">
+            <div class="table-header">
+                <h2>TABEL 7 — JOB ITEMS</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item Naam</th>
+                            <th>Baan</th>
+                            <th>Prijs ($)</th>
+                            <th>Factor t.o.v. Startgeld</th>
+                        </tr>
+                    </thead>
+                    <tbody id="job-items-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 8 — DRUGS -->
+        <section id="table-8">
+            <div class="table-header">
+                <h2>TABEL 8 — DRUGS PRIJZEN (STRAATWAARDE)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Drugs Naam</th>
+                            <th>Item ID</th>
+                            <th>Prijs ($)</th>
+                            <th>Factor t.o.v. Startgeld</th>
+                            <th>Notities</th>
+                        </tr>
+                    </thead>
+                    <tbody id="drugs-body">
+                        <!-- Populated by JS -->
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 9 — DRUG LOODS & PRODUCTIE -->
+        <section id="table-9">
+            <div class="table-header">
+                <h2>TABEL 9 — DRUG LOODS & PRODUCTIE</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Activiteit / Investering</th>
+                            <th>Kosten Inleg (€)</th>
+                            <th>Tijd</th>
+                            <th>Aantal (Yield)</th>
+                            <th>Winst per ronde</th>
+                            <th>Grind Tijd (ROI)</th>
+                            <th>Uitleg</th>
+                        </tr>
+                    </thead>
+                    <tbody id="production-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 10 — WAPEN CRAFTING -->
+        <section id="table-10">
+            <div class="table-header">
+                <h2>TABEL 10 — WAPEN CRAFTING & ONDERDELEN</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Wapen / Onderdeel</th>
+                            <th>Type</th>
+                            <th>Kosten / Inleg (€)</th>
+                            <th>Factor t.o.v. Startgeld</th>
+                            <th>Geadviseerde Verkoopprijs (€)</th>
+                            <th>Uitleg / Onderdelen</th>
+                        </tr>
+                    </thead>
+                    <tbody id="weapon-crafting-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 11 — VOERTUIG TUNING -->
+        <section id="table-11">
+            <div class="table-header">
+                <h2>TABEL 11 — VOERTUIG TUNING & UPGRADES</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Onderdeel / Upgrade</th>
+                            <th>Type</th>
+                            <th>Nieuwe Prijs (€)</th>
+                            <th>Factor t.o.v. Startgeld</th>
+                            <th>Oude Prijs (€)</th>
+                            <th>Balans Notitie</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tuning-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 12 — OVERVALLEN & HEISTS -->
+        <section id="table-12">
+            <div class="table-header">
+                <h2>TABEL 12 — OVERVALLEN & BANKEN (PADDY)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Overval Naam</th>
+                            <th>Min. Politie</th>
+                            <th>Gem. Payout (€)</th>
+                            <th>Cooldown</th>
+                            <th>Moeilijkheid / Tier</th>
+                        </tr>
+                    </thead>
+                    <tbody id="heists-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 13 — HUISINBRAAK ITEMS -->
+        <section id="table-13">
+            <div class="table-header">
+                <h2>TABEL 13 — HUISINBRAAK ITEMS (VERKOOP)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item Naam</th>
+                            <th>Item Code</th>
+                            <th>Verkoopprijs (€)</th>
+                            <th>Type / Zeldzaamheid</th>
+                        </tr>
+                    </thead>
+                    <tbody id="house-robbery-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 14 — HUISVESTING & INTERIEURS -->
+        <section id="table-14">
+            <div class="table-header">
+                <h2>TABEL 14 — HUISVESTING & INTERIEURS</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Interieur Type</th>
+                            <th>Prijs (€)</th>
+                            <th>Factor t.o.v. Startgeld</th>
+                            <th>Dagen Werken (Est.)</th>
+                            <th>Status / Niveau</th>
+                        </tr>
+                    </thead>
+                    <tbody id="housing-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 15 — BLACK MARKET GEAR -->
+        <section id="table-15">
+            <div class="table-header">
+                <h2>TABEL 15 — BLACK MARKET (ILLEGALE TOOLS)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item Naam</th>
+                            <th>Item Code</th>
+                            <th>Inkoop Prijs (€)</th>
+                            <th>Toepassing</th>
+                        </tr>
+                    </thead>
+                    <tbody id="blackmarket-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 16 — PRISON BREAK & OVERIG -->
+        <section id="table-16">
+            <div class="table-header">
+                <h2>TABEL 16 — GEVANGENIS & UITBRAAK</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Naam Activiteit</th>
+                            <th>Kosten / Payout</th>
+                            <th>Benodigd Item</th>
+                            <th>Opmerkingen</th>
+                        </tr>
+                    </thead>
+                    <tbody id="prison-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 17 — BELASTINGDIENST -->
+        <section id="table-17">
+            <div class="table-header">
+                <h2>TABEL 17 — VERMOGENSBELASTING (MONEY SINK)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vermogen (Banksaldo)</th>
+                            <th>Belasting Percentage</th>
+                            <th>Verwachte Afdracht per Dag</th>
+                            <th>Impact Niveau</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tax-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 18 — VISSEN (BURGER JOB) -->
+        <section id="table-18">
+            <div class="table-header">
+                <h2>TABEL 18 — VISSEN (BURGER JOB)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Activiteit</th>
+                            <th>Opbrengst per Vangst</th>
+                            <th>Kosten</th>
+                            <th>Geschat Inkomen</th>
+                            <th>Opmerkingen</th>
+                        </tr>
+                    </thead>
+                    <tbody id="civilian-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 19 — JOB SALARISSEN -->
+        <section id="table-19">
+            <div class="table-header">
+                <h2>TABEL 19 — JOB SALARISSEN (WHITELIST)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Job</th>
+                            <th>Rang</th>
+                            <th>Salaris / Betaalmoment</th>
+                            <th>Salaris Schaal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="salary-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 19c — DRUGSTRANSFER PRIJZEN -->
+        <section id="table-19c">
+            <div class="table-header">
+                <h2>TABEL 19c — DRUGSTRANSFER ECONOMIE (KILO'S)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Product / Actie</th><th>Inkoop (p/k)</th><th>Verkoop (p/k)</th><th>Winst (p/k)</th><th>Verwerkingstijd</th><th>Uurloon (Bruto)</th><th>Notitie</th></tr></thead>
+                    <tbody id="drugtransfer-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 19b — GARAGE KOSTEN -->
+        <section id="table-19b">
+            <div class="table-header">
+                <h2>TABEL 19b — GARAGE & VOERTUIG KOSTEN</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Item / Actie</th><th>Kosten</th><th>Notitie</th></tr></thead>
+                    <tbody id="garage-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 20 — TUINIEREN -->
+        <section id="table-20">
+            <div class="table-header">
+                <h2>TABEL 20 — TUINIEREN (Burger Job)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Item / Actie</th><th>Uitbetaling</th><th>Tijd (Sessie)</th><th>Loon per Uur</th><th>Notitie</th></tr></thead>
+                    <tbody id="gardening-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 21 — HOUTHAKKEN -->
+        <section id="table-21">
+            <div class="table-header">
+                <h2>TABEL 21 — HOUTHAKKEN (Burger Job)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Item / Actie</th><th>Uitbetaling</th><th>Tijd (Sessie)</th><th>Loon per Uur</th><th>Notitie</th></tr></thead>
+                    <tbody id="lumberjack-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 22 — TRUCKING -->
+        <section id="table-22">
+            <div class="table-header">
+                <h2>TABEL 22 — TRUCKING (Burger Job)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Item / Actie</th><th>Uitbetaling</th><th>Tijd (Sessie)</th><th>Loon per Uur</th><th>Notitie</th></tr></thead>
+                    <tbody id="trucking-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 23 — DEURWAARDER -->
+        <section id="table-23">
+            <div class="table-header">
+                <h2>TABEL 23 — DEURWAARDER (Burger Job)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Item / Actie</th><th>Uitbetaling</th><th>Tijd (Sessie)</th><th>Loon per Uur</th><th>Notitie</th></tr></thead>
+                    <tbody id="deurwaarder-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 24 — MIJNWERKER -->
+        <section id="table-24">
+            <div class="table-header">
+                <h2>TABEL 24 — MIJNWERKER (Burger Job)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Item / Actie</th><th>Kosten</th><th>Verkoopprijs</th><th>Tijd (Sessie)</th><th>Loon per Uur</th><th>Notitie</th></tr></thead>
+                    <tbody id="mijnwerker-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 25 — PIZZABEZORGER -->
+        <section id="table-25">
+            <div class="table-header">
+                <h2>TABEL 25 — PIZZABEZORGER (Burger Job)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Item / Actie</th><th>Uitbetaling</th><th>Tijd (Sessie)</th><th>Loon per Uur</th><th>Notitie</th></tr></thead>
+                    <tbody id="pizzajob-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 26 — STADSBEHEER -->
+        <section id="table-26">
+            <div class="table-header">
+                <h2>TABEL 26 — STADSBEHEER (Burger Job)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Item / Actie</th><th>Uitbetaling</th><th>Tijd (Sessie)</th><th>Loon per Uur</th><th>Notitie</th></tr></thead>
+                    <tbody id="stadsbeheer-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLE 27 — AIRPORT JOB -->
+        <section id="table-27">
+            <div class="table-header">
+                <h2>TABEL 27 — AIRPORT JOB (Professions)</h2>
+                <div class="line"></div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Item / Actie</th><th>Uitbetaling</th><th>Tijd (Sessie)</th><th>Loon per Uur</th><th>Notitie</th></tr></thead>
+                    <tbody id="airport-body"></tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- SIMPLE EXPLANATION MODAL -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modal-body">
+                <!-- Data from JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
